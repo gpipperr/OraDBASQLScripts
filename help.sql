@@ -13,6 +13,7 @@ DOC
 
 	- database.sql         - name and age of the database
 	- status.sql           - status of the instance/cluster
+	- cdb.sql              - check this DB (12c onwards) for plugable configuration
 	- date.sql             - get the actual date and time of the DB
 	- instance.sql         - status of the instance where the user is connected
 	- limit.sql            - resource limits since last startup of the instances
@@ -67,6 +68,7 @@ DOC
 	- taf.sql              - Check TAF settings of the connections
 	- connection_pool.sql  - Show the Database Resident Connection Pooling (DRCP) Settings
 	- ssl.sql              - check the  sql*net connection if ssl or encryption is in use
+	- sqlnet.sql           - get SQL*Net Informations
 
 	- locks.sql            - locks in the database - mode 6 is the blocker!
 	- ddl_locks.sql        - check for DDL Locks
@@ -79,6 +81,7 @@ DOC
 	- checkpoint.sql       - get the actual status for the instance recovery
 
 	- my_user.sql          - who am I and over with service I connect to the database
+	
 	- nls.sql              - global and session NLS Settings
 	- version.sql          - version of the database
 	- test_sqlnet_fw.sql   - test the time-outs of SQL*Net
@@ -115,6 +118,9 @@ DOC
 	- roles.sql            - all roles in the database - parameter 1 part of the role name
 	- role.sql             - get the rights on a role
 	- role_ddl.sql         - get the dll of one role in the database - parameter 1 the role name
+	
+	- any_rights.sql       - show all users with any rights in the database
+	- inherit_rights.sql   - show all users with inherit priviliges rights
 
 	- profile.sql          - profiles for the user of this database
 	- proxy.sql            - proxy settings in the database
@@ -132,10 +138,13 @@ DOC
 	- tab_stat.sql         - get the statics of the table                 - parameter - Owner, Table name
 	- tab_desc.sql         - describe the columns of the table            - parameter 1 - part of the table
 	- tab_ddl.sql          - get the create script of a table             - parameter - Owner, Table name
+	- tab_priv.sql         - get the priviliges on a tab                  - parameter - Owner, Table name
 	- tab_last.sql         - get the change date of a record in the table - parameter - Owner, Table name
 	- tab_mod.sql          - get the last modifications of the table      - parameter - Owner, Table name
 	- tab_data_changes.sql - get an overview over changes on the tables of a user - parameter - Owner
 	- tab_umlaut.sql       - check for tables/views if umlauts are used for the naming of tables and columns 
+	- tab_identity_col.sql - get the sequence of a ID Column from the database  - parameter - Owner, Table name
+	- my_tab_rights.sql    - get all rights on tables outside my schema
 	
 	- tab_usage.sql        - check if the table is used in the last time - parameter - Owner, Table name
 	- tab_part.sql         - get the partition information of a table     - parameter - Owner, Table name
@@ -232,6 +241,8 @@ DOC
 	- audit.sql         - show the audit settings 
 	- audit_sum.sql     - audit log summary
 	- audit_login.sql   - audit the logins of users
+	- audit_failed_login.sql - check for failed logins in the last time
+	- audit_logoff_cleanup.sql - check for dropped Sessions in the last time
 	
 	- jobs.sql          - jobs in the database job$ and scheduler tasks info
 	- jobs_dbms.sql     - jobs declared with dbms_job - old style jobs
@@ -328,6 +339,7 @@ DOC
 	- http_ftp_port.sql       - get the port settings of the database
 	
 	- ords.sql                - get the ORDS REST service definitions
+	- apex_version.sql        - get the ORDS and APEX Version in this DB
 	
 	#Create Scripts
 	=================
@@ -362,6 +374,7 @@ DOC
 
 	- 01-db-setup/create_global_errorlog.sql     - create a global error table and error trigger + maintain job
 	- 01-db-setup/delete_global_errorlog.sql     - delete the global error trigger + error table
+	- 01-db-setup/report_global_errorlog.sql	 - template to create HTML report over all errors in the sql error log
 	
 	- 01-db-setup/create_audit_log_database.sql  - create own table space for auditlog, move audit log to this table pace - create clean job
 	- 01-db-setup/set_audit_minimal_settings.sql - set minimal audit parameter
